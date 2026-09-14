@@ -1,0 +1,36 @@
+
+# Ignore Directories:
+
+datasets/
+imgs/
+save_weights/
+imgs_old/
+save_weights_old/
+save_weights_server/
+logs/
+Persian-Words-Database/
+res_1.in_vocab_tr_writer/
+res_2.in_vocab_te_writer/
+res_3.oo_vocab_tr_writer/
+res_4.oo_vocab_te_writer/
+word_ladder/
+
+# Ignore Files:
+recognizer/models/__pycache__/*.pyc
+__pycache__/*.pyc
+
+id_rsa
+
+nohup.out
+*.log
+
+what_to_do.txt
+
+run_process.sh
+run_files.sh
+
+update_aban.py
+convert_gt_to_farsi.py
+load_data_farsi.py
+
+test_code.py
