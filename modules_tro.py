@@ -200,6 +200,12 @@ class DisModel(nn.Module):
         self.cnn_f = nn.Sequential(*cnn_f)
         self.cnn_c = nn.Sequential(*cnn_c)
         self.bce = nn.BCEWithLogitsLoss()
+        # One-sided label smoothing on the REAL target only. With only 125
+        # distinct word shapes in the real distribution (vs. an OOV corpus of
+        # tens of thousands of words for the fake side), D can memorize
+        # "real" almost perfectly and dominate G very early -- a common
+        # trigger for the generator collapsing to a few safe outputs.
+        self.real_label = 0.9
 
     def forward(self, x):
         feat = self.cnn_f(x)
@@ -212,10 +218,23 @@ class DisModel(nn.Module):
         fake_loss = self.bce(resp_fake, label)
         return fake_loss
 
-    def calc_dis_real_loss(self, input_real):
-        label = torch.ones(input_real.shape[0], self.final_size).to(gpu)
+    def calc_dis_real_loss(self, input_real, r1_weight=0.0):
+        label = torch.full(
+            (input_real.shape[0], self.final_size), self.real_label
+        ).to(gpu)
         resp_real = self.forward(input_real)
         real_loss = self.bce(resp_real, label)
+        if r1_weight > 0:
+            # Zero-centered R1 gradient penalty (Mescheder et al., 2018) on
+            # the real branch: penalizes D for having a sharp gradient around
+            # real samples, which keeps it from collapsing onto a razor-thin
+            # decision boundary around the narrow 125-word real manifold.
+            # `input_real` must already have requires_grad_() set by caller.
+            grad_real = torch.autograd.grad(
+                outputs=resp_real.sum(), inputs=input_real, create_graph=True
+            )[0]
+            r1_penalty = grad_real.pow(2).reshape(grad_real.shape[0], -1).sum(1).mean()
+            real_loss = real_loss + r1_weight * r1_penalty
         return real_loss
 
     def calc_gen_loss(self, input_fake):
@@ -223,6 +242,24 @@ class DisModel(nn.Module):
         resp_fake = self.forward(input_fake)
         fake_loss = self.bce(resp_fake, label)
         return fake_loss
+
+class SmoothedCrossEntropy(nn.Module):
+    """Label-smoothed cross entropy, implemented by hand so it works with old
+    torch versions that predate CrossEntropyLoss(label_smoothing=...)."""
+
+    def __init__(self, smoothing=0.1):
+        super(SmoothedCrossEntropy, self).__init__()
+        self.smoothing = smoothing
+        self.log_softmax = nn.LogSoftmax(dim=-1)
+
+    def forward(self, logits, target):
+        n_classes = logits.size(-1)
+        log_probs = self.log_softmax(logits)
+        with torch.no_grad():
+            true_dist = torch.full_like(log_probs, self.smoothing / (n_classes - 1))
+            true_dist.scatter_(1, target.unsqueeze(1), 1.0 - self.smoothing)
+        return torch.mean(torch.sum(-true_dist * log_probs, dim=-1))
+
 
 class WriterClaModel(nn.Module):
     def __init__(self, num_writers):
@@ -248,11 +285,19 @@ class WriterClaModel(nn.Module):
                              activation='lrelu',
                              activation_first=True)]
         self.cnn_f = nn.Sequential(*cnn_f)
+        # Only ~125 images per writer class (350 train writers): a plain
+        # 6-layer conv classifier memorizes that in a few epochs, after which
+        # its gradient w.r.t. generated images becomes an overconfident,
+        # brittle target that can push the generator toward degenerate
+        # "shortcut" textures instead of genuine style. Dropout + label
+        # smoothing keep the classifier signal soft enough to stay useful.
+        self.dropout = nn.Dropout2d(0.3)
         self.cnn_c = nn.Sequential(*cnn_c)
-        self.cross_entropy = nn.CrossEntropyLoss()
+        self.cross_entropy = SmoothedCrossEntropy(smoothing=0.1)
 
     def forward(self, x, y):
         feat = self.cnn_f(x)
+        feat = self.dropout(feat)
         out = self.cnn_c(feat)  # b,num_writers,1,1
         loss = self.cross_entropy(out.squeeze(-1).squeeze(-1), y)
         return loss

@@ -9,6 +9,13 @@ w_dis = 1.0
 w_cla = 1.0
 w_l1 = 0.0
 w_rec = 1.0
+# R1 gradient-penalty weight on the discriminator's real branch (0 disables
+# it). See modules_tro.DisModel.calc_dis_real_loss. Start at 10.0; if the
+# training logs (l_discriminator train-vs-gen in main_run.py's log line)
+# show D is still winning too easily (l_dis_tr -> ~0 while l_dis stays high),
+# raise it; if G starts producing blurry/washed-out strokes because D has
+# gotten too weak, lower it.
+w_r1 = 10.0
 
 gpu = torch.device('cuda')
 
@@ -106,8 +113,8 @@ class ConTranModel(nn.Module):
             sample_img2 = tr_img[:,1:2,:,:]
             sample_img1.requires_grad_()
             sample_img2.requires_grad_()
-            l_real1 = self.dis.calc_dis_real_loss(sample_img1)
-            l_real2 = self.dis.calc_dis_real_loss(sample_img2)
+            l_real1 = self.dis.calc_dis_real_loss(sample_img1, r1_weight=w_r1)
+            l_real2 = self.dis.calc_dis_real_loss(sample_img2, r1_weight=w_r1)
             l_real = (l_real1 + l_real2) / 2.
             l_real.backward(retain_graph=True)
 

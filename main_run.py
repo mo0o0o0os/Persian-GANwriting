@@ -7,8 +7,8 @@ import numpy as np
 import time
 import logging
 import argparse
-from load_data import NUM_WRITERS
-from network_tro import ConTranModel, w_dis, w_cla, w_l1, w_rec
+from load_data import NUM_TRAIN_WRITERS
+from network_tro import ConTranModel, w_dis, w_cla, w_l1, w_rec, w_r1
 from load_data import loadData as load_data_func
 from loss_tro import CER
 
@@ -104,7 +104,7 @@ def sort_batch(batch):
         label_xt,
         label_xt_swap,
     ) in batch:
-        if wid >= NUM_WRITERS:
+        if wid >= NUM_TRAIN_WRITERS:
             logging.error("error!")
         train_domain.append(domain)
         train_wid.append(wid)
@@ -290,7 +290,7 @@ def train(train_loader, model, dis_opt, gen_opt, rec_opt, cla_opt, epoch, epochs
 
 def test(test_loader, epoch, modelFile_o_model):
     if type(modelFile_o_model) == str:
-        model = ConTranModel(NUM_WRITERS, show_iter_num, OOV).to(gpu)
+        model = ConTranModel(NUM_TRAIN_WRITERS, show_iter_num, OOV).to(gpu)
         print("Loading " + modelFile_o_model)
         logging.info("Loading " + modelFile_o_model)
         model.load_state_dict(torch.load(modelFile_o_model))
@@ -373,6 +373,8 @@ def main(train_loader, test_loader, num_writers):
     logging.info(f"    - Classifier (w_cla):    {w_cla}")
     logging.info(f"    - Recognizer (w_rec):    {w_rec}")
     logging.info(f"    - L1 (w_l1):             {w_l1}")
+    logging.info(f"    - Dis R1 penalty (w_r1): {w_r1}")
+    logging.info(f"  Train writers (cla classes): {NUM_TRAIN_WRITERS}")
     logging.info("=" * 60)
 
     epochs = 10001
@@ -427,5 +429,5 @@ def rm_old_model(index):
 if __name__ == "__main__":
     logging.info(time.ctime())
     train_loader, test_loader = all_data_loader()
-    main(train_loader, test_loader, NUM_WRITERS)
+    main(train_loader, test_loader, NUM_TRAIN_WRITERS)
     logging.info(time.ctime())

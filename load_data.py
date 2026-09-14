@@ -14,6 +14,13 @@ MAX_CHARS = 12
 NUM_CHANNEL = 15
 EXTRA_CHANNEL = NUM_CHANNEL + 1
 NUM_WRITERS = 500  # ABAN: 350 train + 150 test
+# ABAN splits train/test by DISJOINT writers (unlike IAM, which splits by word
+# for the same writers). The writer classifier (cla) is only ever trained on
+# wid2label_tr, so its output layer must match len(wid2label_tr) (350), not
+# NUM_WRITERS (500) -- otherwise ~150 output classes never receive gradient
+# and only add noise to the softmax used for both the real cla_update and the
+# generator's adversarial cla loss.
+NUM_TRAIN_WRITERS = len(wid2label_tr)
 NORMAL = True
 OUTPUT_MAX_LEN = MAX_CHARS + 2  # <GO>+groundtruth+<END> = 14
 
