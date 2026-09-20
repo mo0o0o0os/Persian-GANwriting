@@ -64,8 +64,12 @@ def write_image(xg, pred_label, gt_img, gt_label, tr_imgs, xg_swap, pred_label_s
         pil_img = Image.fromarray(img_rgb)
         draw = ImageDraw.Draw(pil_img)
         
-        # بارگذاری فونت فارسی
+        # بارگذاری فونت فارسی -- DejaVuSans/Arial حروف فارسی رو یا اصلاً
+        # ندارن یا به‌درستی نمی‌چسبونن. اول یک فونت فارسی واقعی (مثلاً
+        # Vazirmatn، که نوت‌بوک کولب آن را در ./fonts دانلود می‌کند) را
+        # امتحان می‌کنیم و بقیه فقط fallback هستن.
         font_paths = [
+            "./fonts/Vazirmatn-Regular.ttf",
             "/usr/share/fonts/truetype/dejavu/DejaVuSans.ttf",
             "/usr/share/fonts/truetype/liberation/LiberationSans-Regular.ttf",
             "C:\\Windows\\Fonts\\Arial.ttf",

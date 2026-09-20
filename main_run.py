@@ -29,14 +29,21 @@ logging.basicConfig(
     ]
 )
 
+# argparse.parse_args() قبلاً این‌جا (سطح ماژول) اجرا می‌شد، یعنی صرفِ
+# import کردن main_run.py (مثلاً برای استفاده از sort_batch در یک نوت‌بوک/
+# تست) روی sys.argv واقعی (که توی Jupyter/Colab چیز دیگه‌ایه) پارس می‌شد و
+# کرش می‌کرد. حالا فقط زیر `if __name__ == "__main__":` پارس می‌شه.
 parser = argparse.ArgumentParser(
     description="seq2seq net", formatter_class=argparse.ArgumentDefaultsHelpFormatter
 )
 parser.add_argument("start_epoch", type=int, help="load saved weights from which epoch")
-args = parser.parse_args()
 
 gpu = torch.device("cuda")
 
+# OOV=True فقط یعنی «از L1 pixel-loss روی تصویر واقعی صرف‌نظر کن و کلمه‌ی
+# هدف رو از یک corpus جدا بگیر» -- منبع آن corpus در load_data.py با
+# CLOSED_VOCAB کنترل می‌شه (الان محدود به همون ۱۲۵ کلمه‌ی آبان، یعنی
+# «style transfer با واژگان بسته»، نه OOV واقعی روی کلمات کاملاً جدید).
 OOV = True
 
 NUM_THREAD = 2
@@ -61,7 +68,7 @@ lr_gen = 8e-5
 lr_rec = 8e-6
 lr_cla = 8e-6
 
-CurriculumModelID = args.start_epoch
+CurriculumModelID = 0  # فقط برای import ایمن؛ مقدار واقعی زیر __main__ از آرگومان CLI ست می‌شه
 
 def all_data_loader():
     data_train, data_test = load_data_func(OOV)
@@ -427,6 +434,8 @@ def rm_old_model(index):
             os.remove(m)
 
 if __name__ == "__main__":
+    args = parser.parse_args()
+    CurriculumModelID = args.start_epoch
     logging.info(time.ctime())
     train_loader, test_loader = all_data_loader()
     main(train_loader, test_loader, NUM_TRAIN_WRITERS)

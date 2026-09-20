@@ -1,7 +1,16 @@
-future==0.18.2
-numpy==1.19.0
-opencv-python==4.3.0.36
-Pillow==7.2.0
-python-Levenshtein==0.12.0
-torch==1.5.1
-torchvision==0.6.1
+# نسخه‌های ثابت‌شده‌ی قدیمی (torch==1.5.1 و ...) حذف شدند چون روی
+# Colab/GPU جدید یا نصب نمی‌شن یا فقط نسخه‌ی CPU نصب می‌شه (که با
+# torch.device("cuda") هاردکد شده در کد سازگار نیست).
+# روی Colab: torch/torchvision را نصب نکنید، همونی که خود Colab از قبل
+# با درایور/CUDA سازگار نصب کرده استفاده می‌شود.
+future
+numpy
+opencv-python
+Pillow
+python-Levenshtein
+torch
+torchvision
+# اضافه‌شده: این سه‌تا در کد import می‌شن ولی قبلاً این‌جا نبودن
+albumentations
+arabic-reshaper
+python-bidi

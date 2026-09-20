@@ -26,9 +26,24 @@ OUTPUT_MAX_LEN = MAX_CHARS + 2  # <GO>+groundtruth+<END> = 14
 
 """مسیر تصاویر کلمات ABAN"""
 img_base = "./datasets/aban/words"
-text_corpus = "./corpora_farsi/corpora-farsi-myChars.tr"
 
-with open(text_corpus, "r", encoding='utf-8') as _f:
+# CLOSED_VOCAB=True: هدف مسئله عوض شده از OOV واقعی به
+# "style transfer با واژگان بسته" -- یعنی کلمه‌ی هدف (label_xt) هم از
+# همون ۱۲۵ کلمه‌ی دیتاست آبان انتخاب می‌شه، نه از یک پیکره‌ی ۴۶هزارتایی
+# خارجی. این باعث می‌شه توزیع "واقعی" (۱۲۵ شکل کلمه) و توزیع محتوایی که
+# discriminator/recognizer باهاش مواجه می‌شن یکی باشن -- discriminator
+# دیگه نمی‌تونه صرفاً با رد کردن "شکل‌های ناآشنا" تقلب کنه، که یکی از
+# دلایل اصلی mode collapse روی این دیتاست بود (چون IAM ~۶۰۰۰+ کلمه‌ی
+# یکتا داشت ولی آبان فقط ۱۲۵ تا).
+# برای برگشت به حالت OOV واقعی (نیازمند یک پیکره‌ی بزرگ‌تر مکمل مثل
+# Khayyam)، CLOSED_VOCAB را False کنید.
+CLOSED_VOCAB = True
+if CLOSED_VOCAB:
+    text_corpus_path = "./corpora_farsi/in_vocab.aban.txt"
+else:
+    text_corpus_path = "./corpora_farsi/corpora-farsi-myChars.tr"
+
+with open(text_corpus_path, "r", encoding='utf-8') as _f:
     text_corpus = _f.read().strip().split('\n')
 
 src = "Groundtruth_farsi/gan.aban.tr_va.gt.filter27"
