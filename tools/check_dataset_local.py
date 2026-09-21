@@ -9,18 +9,27 @@
      کد آموزش (load_data.py) واقعاً به آن نیاز دارد را با پوشه‌ی شما مقایسه و لیست
      دقیق فایل‌های گم‌شده را در یک فایل txt ذخیره می‌کند.
 
-فقط بخش «تنظیمات» زیر را با مسیرهای خودتان پر کنید و اجرا کنید:
+هیچ ویرایشی لازم نیست — فقط این اسکریپت را در همان پوشه‌ای بگذارید که پوشه‌ی «words»
+(همان پوشه‌ای که همه‌ی عکس‌ها را توش ریخته‌اید) کنارش است، و از ترمینال در همان پوشه اجرا کنید:
+    cd /path/to/folder-that-contains-words
     python check_dataset_local.py
+
+اگر اسم پوشه‌ی عکس‌ها چیزی غیر از «words» است یا جای دیگری است، مسیرش را به‌عنوان
+آرگومان بدهید:
+    python check_dataset_local.py /path/to/your/images/folder
 """
 
 import os
 import re
 import csv
+import sys
 import urllib.request
 from collections import Counter
 
 # ============================== تنظیمات ==============================
-IMAGES_DIR = r"PUT_YOUR_LOCAL_WORDS_FOLDER_HERE"          # پوشه‌ای که همه‌ی ۶۲۵۰۰ عکس داخلش ریخته‌اید
+# پوشه‌ی عکس‌ها: اگر آرگومان ترمینال داده باشید همان استفاده می‌شود، وگرنه پوشه‌ی
+# «words» کنار همین اسکریپت (یعنی از همان پوشه‌ای که این اسکریپت را اجرا می‌کنید).
+IMAGES_DIR = sys.argv[1] if len(sys.argv) > 1 else "words"
 
 WORD_CSV = r"word_labels_with_translations.csv"           # اگر این فایل کنار اسکریپت نیست، مسیرش را بدهید
                                                             # اگر پیدا نشود، خودکار از گیت‌هاب دانلود می‌شود
@@ -66,8 +75,13 @@ def main():
     print(f"تعداد کلمات در CSV: {len(word_codes)}")
 
     # ۲) فایل‌های پوشه را یک‌بار لیست کن (بدون stat تکی روی هرکدام)
+    print(f"پوشه‌ی عکس‌ها: {os.path.abspath(IMAGES_DIR)}")
     if not os.path.isdir(IMAGES_DIR):
-        raise SystemExit(f"پوشه‌ی {IMAGES_DIR} پیدا نشد. مقدار IMAGES_DIR را در بالای اسکریپت درست کنید.")
+        raise SystemExit(
+            f"پوشه‌ی «{IMAGES_DIR}» پیدا نشد (پوشه‌ی فعلی ترمینال: {os.getcwd()}).\n"
+            f"این اسکریپت را از همان پوشه‌ای اجرا کنید که پوشه‌ی words کنارش است، "
+            f"یا مسیر را صریح بدهید: python check_dataset_local.py /path/to/words"
+        )
     print("در حال خواندن لیست فایل‌های پوشه ...")
     all_files = os.listdir(IMAGES_DIR)
     print(f"تعداد کل فایل‌ها در پوشه: {len(all_files)}")
