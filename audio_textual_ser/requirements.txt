@@ -1,0 +1,15 @@
+# Preinstalled on Kaggle and Colab except where noted.
+torch
+transformers>=4.40
+datasets>=2.14
+scikit-learn
+scipy
+numpy
+pandas
+matplotlib
+soundfile
+librosa          # optional: exact resampling as datasets.Audio; falls back to torchaudio
+openpyxl         # Excel export of the result tables
+tqdm
+huggingface_hub
+kagglehub        # optional: download ShEMO outside Kaggle
