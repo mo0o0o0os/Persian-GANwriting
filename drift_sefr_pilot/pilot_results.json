@@ -1,0 +1,434 @@
+{
+ "SEA abrupt": {
+  "detectors": {
+   "ADWIN | hard error": {
+    "false_alarms_per_run": 0.0,
+    "missed_%": 0.0,
+    "median_delay": 127.0,
+    "mean_delay": 136.6
+   },
+   "ADWIN | soft error": {
+    "false_alarms_per_run": 0.0,
+    "missed_%": 0.0,
+    "median_delay": 287.0,
+    "mean_delay": 314.73333333333335
+   },
+   "PageHinkley | hard error": {
+    "false_alarms_per_run": 0.23333333333333334,
+    "missed_%": 0.0,
+    "median_delay": 61.5,
+    "mean_delay": 67.26666666666667
+   },
+   "PageHinkley | soft error": {
+    "false_alarms_per_run": 0.3,
+    "missed_%": 0.0,
+    "median_delay": 89.0,
+    "mean_delay": 117.03333333333333
+   },
+   "Chi2 W=100 | hard error": {
+    "false_alarms_per_run": 0.6666666666666666,
+    "missed_%": 0.0,
+    "median_delay": 48.0,
+    "mean_delay": 48.3
+   },
+   "Chi2 W=100 | soft error": {
+    "false_alarms_per_run": 0.6333333333333333,
+    "missed_%": 23.33333333333333,
+    "median_delay": 1625.0,
+    "mean_delay": 1513.5652173913043
+   },
+   "Chi2 W=200 | hard error": {
+    "false_alarms_per_run": 0.3333333333333333,
+    "missed_%": 0.0,
+    "median_delay": 60.0,
+    "mean_delay": 68.46666666666667
+   },
+   "Chi2 W=200 | soft error": {
+    "false_alarms_per_run": 0.4666666666666667,
+    "missed_%": 26.66666666666667,
+    "median_delay": 1309.5,
+    "mean_delay": 1520.7727272727273
+   },
+   "DDM | hard error": {
+    "false_alarms_per_run": 2.3333333333333335,
+    "missed_%": 0.0,
+    "median_delay": 171.0,
+    "mean_delay": 253.03333333333333
+   }
+  },
+  "accuracy_before_after": {
+   "static": [
+    0.9638555555555557,
+    0.8331
+   ],
+   "online (cumulative)": [
+    0.9627666666666667,
+    0.8810666666666667
+   ],
+   "online + forgetting 0.995": [
+    0.9605222222222222,
+    0.9639666666666666
+   ]
+  }
+ },
+ "SEA gradual": {
+  "detectors": {
+   "ADWIN | hard error": {
+    "false_alarms_per_run": 0.0,
+    "missed_%": 0.0,
+    "median_delay": 1031.0,
+    "mean_delay": 1034.2
+   },
+   "ADWIN | soft error": {
+    "false_alarms_per_run": 0.0,
+    "missed_%": 0.0,
+    "median_delay": 1511.0,
+    "mean_delay": 1513.1333333333334
+   },
+   "PageHinkley | hard error": {
+    "false_alarms_per_run": 0.1,
+    "missed_%": 0.0,
+    "median_delay": 560.5,
+    "mean_delay": 548.1
+   },
+   "PageHinkley | soft error": {
+    "false_alarms_per_run": 0.16666666666666666,
+    "missed_%": 0.0,
+    "median_delay": 733.0,
+    "mean_delay": 697.3
+   },
+   "Chi2 W=100 | hard error": {
+    "false_alarms_per_run": 0.43333333333333335,
+    "missed_%": 0.0,
+    "median_delay": 556.0,
+    "mean_delay": 539.3
+   },
+   "Chi2 W=100 | soft error": {
+    "false_alarms_per_run": 0.5,
+    "missed_%": 50.0,
+    "median_delay": 1935.0,
+    "mean_delay": 1638.2
+   },
+   "Chi2 W=200 | hard error": {
+    "false_alarms_per_run": 0.16666666666666666,
+    "missed_%": 0.0,
+    "median_delay": 606.0,
+    "mean_delay": 595.3333333333334
+   },
+   "Chi2 W=200 | soft error": {
+    "false_alarms_per_run": 0.4,
+    "missed_%": 53.333333333333336,
+    "median_delay": 1714.5,
+    "mean_delay": 1509.2857142857142
+   },
+   "DDM | hard error": {
+    "false_alarms_per_run": 2.3333333333333335,
+    "missed_%": 0.0,
+    "median_delay": 888.0,
+    "mean_delay": 977.4
+   }
+  },
+  "accuracy_before_after": {
+   "static": [
+    0.9638555555555557,
+    0.8330888888888889
+   ],
+   "online (cumulative)": [
+    0.9627666666666667,
+    0.8809888888888892
+   ],
+   "online + forgetting 0.995": [
+    0.9605222222222222,
+    0.9633888888888887
+   ]
+  }
+ },
+ "Sine abrupt": {
+  "detectors": {
+   "ADWIN | hard error": {
+    "false_alarms_per_run": 0.0,
+    "missed_%": 0.0,
+    "median_delay": 95.0,
+    "mean_delay": 92.86666666666666
+   },
+   "ADWIN | soft error": {
+    "false_alarms_per_run": 0.0,
+    "missed_%": 0.0,
+    "median_delay": 95.0,
+    "mean_delay": 101.4
+   },
+   "PageHinkley | hard error": {
+    "false_alarms_per_run": 0.4666666666666667,
+    "missed_%": 0.0,
+    "median_delay": 48.5,
+    "mean_delay": 49.733333333333334
+   },
+   "PageHinkley | soft error": {
+    "false_alarms_per_run": 0.5333333333333333,
+    "missed_%": 0.0,
+    "median_delay": 51.0,
+    "mean_delay": 48.333333333333336
+   },
+   "Chi2 W=100 | hard error": {
+    "false_alarms_per_run": 0.7,
+    "missed_%": 0.0,
+    "median_delay": 34.5,
+    "mean_delay": 39.36666666666667
+   },
+   "Chi2 W=100 | soft error": {
+    "false_alarms_per_run": 0.8333333333333334,
+    "missed_%": 0.0,
+    "median_delay": 101.0,
+    "mean_delay": 121.7
+   },
+   "Chi2 W=200 | hard error": {
+    "false_alarms_per_run": 0.43333333333333335,
+    "missed_%": 0.0,
+    "median_delay": 56.0,
+    "mean_delay": 55.13333333333333
+   },
+   "Chi2 W=200 | soft error": {
+    "false_alarms_per_run": 0.7333333333333333,
+    "missed_%": 0.0,
+    "median_delay": 142.5,
+    "mean_delay": 138.56666666666666
+   },
+   "DDM | hard error": {
+    "false_alarms_per_run": 1.9333333333333333,
+    "missed_%": 0.0,
+    "median_delay": 112.0,
+    "mean_delay": 155.6
+   }
+  },
+  "accuracy_before_after": {
+   "static": [
+    0.9589111111111112,
+    0.7509111111111113
+   ],
+   "online (cumulative)": [
+    0.9608444444444443,
+    0.7813666666666668
+   ],
+   "online + forgetting 0.995": [
+    0.9580666666666667,
+    0.8199777777777778
+   ]
+  }
+ },
+ "Sine gradual": {
+  "detectors": {
+   "ADWIN | hard error": {
+    "false_alarms_per_run": 0.0,
+    "missed_%": 0.0,
+    "median_delay": 807.0,
+    "mean_delay": 836.8666666666667
+   },
+   "ADWIN | soft error": {
+    "false_alarms_per_run": 0.0,
+    "missed_%": 0.0,
+    "median_delay": 807.0,
+    "mean_delay": 842.2
+   },
+   "PageHinkley | hard error": {
+    "false_alarms_per_run": 0.3333333333333333,
+    "missed_%": 0.0,
+    "median_delay": 451.5,
+    "mean_delay": 454.2
+   },
+   "PageHinkley | soft error": {
+    "false_alarms_per_run": 0.23333333333333334,
+    "missed_%": 0.0,
+    "median_delay": 447.5,
+    "mean_delay": 427.03333333333336
+   },
+   "Chi2 W=100 | hard error": {
+    "false_alarms_per_run": 0.6333333333333333,
+    "missed_%": 0.0,
+    "median_delay": 448.5,
+    "mean_delay": 447.8333333333333
+   },
+   "Chi2 W=100 | soft error": {
+    "false_alarms_per_run": 0.5666666666666667,
+    "missed_%": 0.0,
+    "median_delay": 992.0,
+    "mean_delay": 1008.1666666666666
+   },
+   "Chi2 W=200 | hard error": {
+    "false_alarms_per_run": 0.4,
+    "missed_%": 0.0,
+    "median_delay": 482.0,
+    "mean_delay": 487.96666666666664
+   },
+   "Chi2 W=200 | soft error": {
+    "false_alarms_per_run": 0.5666666666666667,
+    "missed_%": 0.0,
+    "median_delay": 954.0,
+    "mean_delay": 976.7333333333333
+   },
+   "DDM | hard error": {
+    "false_alarms_per_run": 1.7333333333333334,
+    "missed_%": 0.0,
+    "median_delay": 697.0,
+    "mean_delay": 719.8
+   }
+  },
+  "accuracy_before_after": {
+   "static": [
+    0.9589111111111112,
+    0.7509222222222222
+   ],
+   "online (cumulative)": [
+    0.9608444444444443,
+    0.7814444444444445
+   ],
+   "online + forgetting 0.995": [
+    0.9580666666666667,
+    0.8197333333333333
+   ]
+  }
+ },
+ "Agrawal abrupt": {
+  "detectors": {
+   "ADWIN | hard error": {
+    "false_alarms_per_run": 0.0,
+    "missed_%": 96.66666666666667,
+    "median_delay": 1247.0,
+    "mean_delay": 1247.0
+   },
+   "ADWIN | soft error": {
+    "false_alarms_per_run": 0.0,
+    "missed_%": 0.0,
+    "median_delay": 607.0,
+    "mean_delay": 595.2666666666667
+   },
+   "PageHinkley | hard error": {
+    "false_alarms_per_run": 0.23333333333333334,
+    "missed_%": 30.000000000000004,
+    "median_delay": 1007.0,
+    "mean_delay": 1376.142857142857
+   },
+   "PageHinkley | soft error": {
+    "false_alarms_per_run": 0.3333333333333333,
+    "missed_%": 6.666666666666665,
+    "median_delay": 175.0,
+    "mean_delay": 209.96428571428572
+   },
+   "Chi2 W=100 | hard error": {
+    "false_alarms_per_run": 1.3666666666666667,
+    "missed_%": 33.333333333333336,
+    "median_delay": 736.0,
+    "mean_delay": 998.0
+   },
+   "Chi2 W=100 | soft error": {
+    "false_alarms_per_run": 1.0,
+    "missed_%": 0.0,
+    "median_delay": 217.5,
+    "mean_delay": 297.93333333333334
+   },
+   "Chi2 W=200 | hard error": {
+    "false_alarms_per_run": 1.2,
+    "missed_%": 40.0,
+    "median_delay": 869.5,
+    "mean_delay": 1113.7222222222222
+   },
+   "Chi2 W=200 | soft error": {
+    "false_alarms_per_run": 1.1,
+    "missed_%": 0.0,
+    "median_delay": 199.5,
+    "mean_delay": 241.2
+   },
+   "DDM | hard error": {
+    "false_alarms_per_run": 0.13333333333333333,
+    "missed_%": 100.0,
+    "median_delay": null,
+    "mean_delay": null
+   }
+  },
+  "accuracy_before_after": {
+   "static": [
+    0.5064222222222222,
+    0.5073333333333333
+   ],
+   "online (cumulative)": [
+    0.5061555555555556,
+    0.5570888888888889
+   ],
+   "online + forgetting 0.995": [
+    0.5101111111111111,
+    0.5417000000000001
+   ]
+  }
+ },
+ "Agrawal gradual": {
+  "detectors": {
+   "ADWIN | hard error": {
+    "false_alarms_per_run": 0.0,
+    "missed_%": 100.0,
+    "median_delay": null,
+    "mean_delay": null
+   },
+   "ADWIN | soft error": {
+    "false_alarms_per_run": 0.0,
+    "missed_%": 0.0,
+    "median_delay": 1863.0,
+    "mean_delay": 1886.4666666666667
+   },
+   "PageHinkley | hard error": {
+    "false_alarms_per_run": 0.2,
+    "missed_%": 53.333333333333336,
+    "median_delay": 1429.0,
+    "mean_delay": 1370.0
+   },
+   "PageHinkley | soft error": {
+    "false_alarms_per_run": 0.13333333333333333,
+    "missed_%": 0.0,
+    "median_delay": 912.0,
+    "mean_delay": 995.5333333333333
+   },
+   "Chi2 W=100 | hard error": {
+    "false_alarms_per_run": 1.1333333333333333,
+    "missed_%": 43.333333333333336,
+    "median_delay": 1180.0,
+    "mean_delay": 1294.4705882352941
+   },
+   "Chi2 W=100 | soft error": {
+    "false_alarms_per_run": 0.7333333333333333,
+    "missed_%": 0.0,
+    "median_delay": 1222.0,
+    "mean_delay": 1277.2333333333333
+   },
+   "Chi2 W=200 | hard error": {
+    "false_alarms_per_run": 1.0,
+    "missed_%": 60.0,
+    "median_delay": 1454.0,
+    "mean_delay": 1422.0833333333333
+   },
+   "Chi2 W=200 | soft error": {
+    "false_alarms_per_run": 0.8333333333333334,
+    "missed_%": 0.0,
+    "median_delay": 1143.0,
+    "mean_delay": 1114.1666666666667
+   },
+   "DDM | hard error": {
+    "false_alarms_per_run": 0.13333333333333333,
+    "missed_%": 100.0,
+    "median_delay": null,
+    "mean_delay": null
+   }
+  },
+  "accuracy_before_after": {
+   "static": [
+    0.5064222222222222,
+    0.5072444444444444
+   ],
+   "online (cumulative)": [
+    0.5061555555555556,
+    0.5565333333333334
+   ],
+   "online + forgetting 0.995": [
+    0.5101111111111111,
+    0.5409222222222223
+   ]
+  }
+ }
+}
